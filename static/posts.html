@@ -1,0 +1,26 @@
+{{ define "body" }}
+
+<div class="container">
+  <table .class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <td scope="col">Tweet</td>
+        <td scope="col">Author</td>
+        <td scope="col">Date</td>
+      </tr>
+    </thead>
+    <thead>
+      {{ range . }}
+
+      <tr>
+        <td scope="row">{{ .Body }}</td>
+        <td>{{ .UserIP }}</td>
+        <td>{{ .Date }}</td>
+      </tr>
+
+      {{ end }}
+    </thead>
+  </table>
+</div>
+
+{{ end }}

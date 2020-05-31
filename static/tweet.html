@@ -1,0 +1,13 @@
+{{ define "body" }}
+
+<div class="container">
+  <form action="/tweet" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="form-group">
+      <label for="tweet">Create a new tweet:</label>
+      <textarea class="form-control" id="tweet" name="tweet" cols="30" rows="10"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+  </form>
+</div>
+
+{{ end }}

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: mongo
+    container_name: app
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_FIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --logpath=/dev/null
+
+  app:
+    image: tweeter
+    container_name: tweeter
+    ports:
+      - 8080:8080
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      - db
