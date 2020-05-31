@@ -2,15 +2,15 @@ package router
 
 import (
 	"context"
-    "log"
 	"go.mongodb.org/mongo-driver/bson"
+	"log"
 )
 
 func GetTweets(userIP string) ([]Tweet, error) {
 	tweetsCollection := db.Collection("tweets")
 
 	var tweets []Tweet
-    cursor, err := tweetsCollection.Find(context.TODO(), bson.M{})
+	cursor, err := tweetsCollection.Find(context.TODO(), bson.M{})
 	if err != nil {
 		return nil, err
 	}
@@ -25,6 +25,6 @@ func performPost(obj interface{}, collectionName string) {
 
 	_, err := tweetsCollection.InsertOne(context.TODO(), obj)
 	if err != nil {
-        log.Printf("failed upload %v: %v", obj, err)
+		log.Printf("failed upload %v: %v", obj, err)
 	}
 }

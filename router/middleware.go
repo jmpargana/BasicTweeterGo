@@ -1,11 +1,11 @@
 package router
 
 import (
-    "go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"html/template"
 	"log"
 	"net/http"
-    "time"
+	"time"
 )
 
 func parseAndExecute(w http.ResponseWriter, r *http.Request, filename string, execute interface{}) {
@@ -15,10 +15,10 @@ func parseAndExecute(w http.ResponseWriter, r *http.Request, filename string, ex
 }
 
 func tweets(w http.ResponseWriter, r *http.Request) {
-    tweets, err := GetTweets("")
-    if err != nil {
-        log.Printf("failed fetching tweets: %v", err)
-    }
+	tweets, err := GetTweets("")
+	if err != nil {
+		log.Printf("failed fetching tweets: %v", err)
+	}
 
 	parseAndExecute(w, r, "./static/posts.html", tweets)
 }
@@ -29,22 +29,22 @@ func tweet(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		r.ParseForm()
 
-        tweet := Tweet{
-            ID: primitive.NewObjectID(),
-            Body: r.Form["tweet"][0],
-            Date: time.Now(),
-            UserIP: r.RemoteAddr,
-        }
+		tweet := Tweet{
+			ID:     primitive.NewObjectID(),
+			Body:   r.Form["tweet"][0],
+			Date:   time.Now(),
+			UserIP: r.RemoteAddr,
+		}
 
-        user := User{
-            ID: primitive.NewObjectID(),
-            UserIP: r.RemoteAddr,
-            Following: []primitive.ObjectID{},
-        }
+		user := User{
+			ID:        primitive.NewObjectID(),
+			UserIP:    r.RemoteAddr,
+			Following: []primitive.ObjectID{},
+		}
 
-        performPost(tweet, "tweets")
-        performPost(user, "users")
-    }
+		performPost(tweet, "tweets")
+		performPost(user, "users")
+	}
 }
 
 func followed(w http.ResponseWriter, r *http.Request) {

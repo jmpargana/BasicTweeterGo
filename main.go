@@ -15,7 +15,7 @@ func main() {
 		Handler: handler,
 	}
 
-    router.ConnectToDB("mongodb://app:27017")
+	router.ConnectToDB("mongodb://app:27017")
 
 	http2.ConfigureServer(&server, &http2.Server{})
 	log.Fatal(server.ListenAndServe())
